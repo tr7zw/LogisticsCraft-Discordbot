@@ -28,6 +28,9 @@ import org.javacord.api.entity.server.Server;
 
 import com.google.gson.Gson;
 
+import dev.tr7zw.discordbot.handler.RoleProvider;
+import dev.tr7zw.discordbot.util.Config;
+
 public class App {
 
 	public static Gson gson = new Gson();
@@ -45,12 +48,19 @@ public class App {
 	public static Emoji spigotEmoji;
 	public static Emoji codemcEmoji;
 	private static final String discordApiEmptyString = "⠀";
+	
+	private static LogisticsCraftBot bot;
 
-	public static void main(String[] args) throws InterruptedException, ExecutionException, IOException {
+	public static void main(String[] args) throws Exception {
 		String token = new String(Files.readAllBytes(new File("token.txt").toPath()), StandardCharsets.UTF_8).trim();
 
 		DiscordApi api = new DiscordApiBuilder().setToken(token).login().join();
-
+		
+		bot = new LogisticsCraftBot(api);
+		
+		bot.addHandler(new RoleProvider());
+		
+		
 		System.out.println("You can invite the bot by using the following url: " + api.createBotInvite());
 		System.out.println(
 				"On servers: " + api.getServers().stream().map(server -> server.getId()).collect(Collectors.toList()));
