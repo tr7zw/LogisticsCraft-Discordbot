@@ -142,7 +142,7 @@ public class App {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					Thread.sleep(1 * 60 * 1000);
+					Thread.sleep(5 * 60 * 1000);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
