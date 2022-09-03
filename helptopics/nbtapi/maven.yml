@@ -1,0 +1,4 @@
+label: Maven dependency
+description: How to add the NBTAPI as a dependency.
+url: https://github.com/tr7zw/Item-NBT-API/wiki/Using-Maven#option-1-nbt-api-as-a-dependency
+text: Follow the guide at this location. Make sure you have the correct artifactId. Don't forget to add the repository.

@@ -1,0 +1,6 @@
+label: Access the settings screen
+description: How to open the settings screen?
+text: |-
+ The settings screen is accessed via the modlist.
+ Forge has the "Mods" button in the main menu.
+ Fabric has a button in the main menu and pause menu(requires ModMenu)

@@ -13,12 +13,12 @@ import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.sql.Connection;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
+import org.javacord.api.entity.activity.ActivityType;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.emoji.Emoji;
 import org.javacord.api.entity.message.Message;
@@ -28,8 +28,8 @@ import org.javacord.api.entity.server.Server;
 
 import com.google.gson.Gson;
 
+import dev.tr7zw.discordbot.handler.HelpCommand;
 import dev.tr7zw.discordbot.handler.RoleProvider;
-import dev.tr7zw.discordbot.util.Config;
 
 public class App {
 
@@ -59,7 +59,9 @@ public class App {
 		bot = new LogisticsCraftBot(api);
 		
 		bot.addHandler(new RoleProvider());
+		bot.addHandler(new HelpCommand());
 		
+		api.updateActivity(ActivityType.WATCHING, "mods and plugins");
 		
 		System.out.println("You can invite the bot by using the following url: " + api.createBotInvite());
 		System.out.println(
@@ -172,8 +174,7 @@ public class App {
 		message.append("[" + codemcEmoji.getMentionTag() + " Latest Dev-Build](https://ci.codemc.io/job/Tr7zw/job/Item-NBT-API/)\n");
 		message.append("[" + githubEmoji.getMentionTag() + " Wiki](https://github.com/tr7zw/Item-NBT-API/wiki)\n");
 
-		nbtStatus.edit(null
-				, new EmbedBuilder().setTitle("NBT-API Info").setTimestampToNow().setFooter("Last updated:")
+		nbtStatus.edit(new EmbedBuilder().setTitle("NBT-API Info").setTimestampToNow().setFooter("Last updated:")
 				.setDescription(message.toString())
 				.setThumbnail("https://tr7zw.dev/test/img/nbtapi-logo.png")
 				.setImage("https://tr7zw.dev/nbtstats.php?time=" + System.currentTimeMillis())
@@ -204,8 +205,7 @@ public class App {
 		message.append("[" + curseEmoji.getMentionTag() + " Curseforge](https://www.curseforge.com/minecraft/mc-mods/first-person-model)\n");
 		message.append("[" + curseEmoji.getMentionTag() + " Latest Release](" + curse.download.url + ")\n");
 		message.append("[" + githubEmoji.getMentionTag() + " Latest Dev-Build](https://github.com/tr7zw/FirstPersonModel-Fabric/actions)\n");
-		firstpersonStatus.edit(null
-				, new EmbedBuilder().setTitle("FirstPerson Mod Info").setTimestampToNow().setFooter("Last updated:")
+		firstpersonStatus.edit(new EmbedBuilder().setTitle("FirstPerson Mod Info").setTimestampToNow().setFooter("Last updated:")
 				.setDescription(message.toString())
 				.setThumbnail("https://media.forgecdn.net/avatars/thumbnails/216/511/64/64/637002697221754383.png")
 					.addField(discordApiEmptyString, curseEmoji.getMentionTag() + " **Curseforge**", false)
